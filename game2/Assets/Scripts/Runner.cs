@@ -12,6 +12,14 @@ public enum RoadLine
 public class Runner : MonoBehaviour
 {
     [SerializeField] RoadLine roadLine;
+    [SerializeField] Rigidbody rigidBody;
+    [SerializeField] float positionX = 3;
+
+    private void Awake()
+    {
+        rigidBody = GetComponent<Rigidbody>();
+
+    }
 
     void Start()
     {
@@ -21,6 +29,11 @@ public class Runner : MonoBehaviour
     void Update()
     {
         Keyboard();
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
     }
 
     void Keyboard()
@@ -47,6 +60,9 @@ public class Runner : MonoBehaviour
         }
     }
 
-
+    void Move()
+    {
+        rigidBody.position = new Vector3(positionX * (int)roadLine,0,0);
+    }
 
 }
