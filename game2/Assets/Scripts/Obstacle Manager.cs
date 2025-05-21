@@ -38,6 +38,18 @@ public class ObstacleManager : MonoBehaviour
         }
     }
 
+    bool ExamineActive()
+    {
+        for (int i=0;i<obstacles.Count;i++)
+        {
+            if (obstacles[i].activeSelf == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
     
 
     public IEnumerator ActiveObstacle()
@@ -52,6 +64,18 @@ public class ObstacleManager : MonoBehaviour
 
             while (obstacles[random].activeSelf==true)
             {
+                if (ExamineActive())
+                {
+                    GameObject clone = Instantiate
+                        (prefabs[(Random.Range
+                        (0, prefabs.Length))] , transform);
+
+                    clone.SetActive(false);
+
+                    obstacles.Add (clone);
+
+
+                }
                 // 현재 인덱스에 있는 게임 오브젝트가
                 // 활성화되어 있으면 random 변수의
                 // 갑을 +1을 해서 다시 검색합니다.
