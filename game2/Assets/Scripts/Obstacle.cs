@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour, Collidable
 {
-    [SerializeField] float speed;
+    [SerializeField] float speed ;
 
     public void Activate()
     {

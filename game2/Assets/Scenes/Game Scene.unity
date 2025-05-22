@@ -435,10 +435,10 @@ MonoBehaviour:
   random: 0
   createCount: 5
   obstacles: []
-  prefabs:
-  - {fileID: 2803296671359938073, guid: fd6e38893bcaaf046818cbd641e7d56c, type: 3}
-  - {fileID: 697274929081819988, guid: 2d8dac963cf6cea40a0530d62723e6c2, type: 3}
-  - {fileID: 7673168253160489777, guid: fdfaad4b0e5751b4988c90ec667a5f50, type: 3}
+  obstaclesNames:
+  - Barrier
+  - Cone
+  - OilDrum
   transforms:
   - {fileID: 255568572}
   - {fileID: 165322803}
@@ -749,7 +749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd40d20993d36a141915cc8c40a3b2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 40
   roads:
   - {fileID: 266337398}
   - {fileID: 576501618}
@@ -968,7 +968,7 @@ Transform:
   m_GameObject: {fileID: 1334237696}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: 4.74, z: -51.4}
+  m_LocalPosition: {x: 0, y: 0, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1615,7 +1615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b74e95b60b56a841b5fc4ee1a7d7892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture2D: {fileID: 2800000, guid: f8d327f88e3408f42b3dc6850224b676, type: 3}
+  texture2D: {fileID: 0}
 --- !u!4 &1816132809
 Transform:
   m_ObjectHideFlags: 0
@@ -1625,7 +1625,7 @@ Transform:
   m_GameObject: {fileID: 1816132807}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0010569096, y: 1.218879, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

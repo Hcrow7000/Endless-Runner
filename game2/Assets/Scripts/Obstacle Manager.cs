@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.UI;
 
 
@@ -11,11 +12,13 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] int random;
     [SerializeField] int createCount = 5;
     [SerializeField] List<GameObject> obstacles;
-    [SerializeField] GameObject [ ] prefabs;
+    [SerializeField] string [ ] obstaclesNames;
     [SerializeField] Transform[] transforms;
-    
+   
     void Start()
-    {
+    { 
+        obstacles.Capacity = 10;
+
         Create();
 
         StartCoroutine(ActiveObstacle());
@@ -27,9 +30,13 @@ public class ObstacleManager : MonoBehaviour
     {
         for (int i = 0; i < createCount; i++)
         {
-            GameObject clone = Instantiate(prefabs
-                [Random.Range(0, prefabs.Length)]
+            GameObject clone = Instantiate
+                (Resources.Load<GameObject>
+                (obstaclesNames[Random.Range
+                (0, obstaclesNames.Length)])
                 ,transform);
+
+            clone.name = clone.name.Replace("(Clone)","");
 
             clone.SetActive(false);
             
@@ -38,6 +45,7 @@ public class ObstacleManager : MonoBehaviour
         }
     }
 
+    
     bool ExamineActive()
     {
         for (int i=0;i<obstacles.Count;i++)
@@ -67,13 +75,17 @@ public class ObstacleManager : MonoBehaviour
                 if (ExamineActive())
                 {
                     GameObject clone = Instantiate
-                        (prefabs[(Random.Range
-                        (0, prefabs.Length))] , transform);
+                        (Resources.Load<GameObject>
+                        (obstaclesNames[Random.Range
+                        (0, obstaclesNames.Length)]) , transform);
+
+                    clone.name = clone.name.Replace("(Clone)", "");
 
                     clone.SetActive(false);
 
                     obstacles.Add (clone);
 
+                    
 
                 }
                 // 현재 인덱스에 있는 게임 오브젝트가
