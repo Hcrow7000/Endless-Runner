@@ -10,10 +10,17 @@ using UnityEngine.UI;
 public class ObstacleManager : MonoBehaviour
 {
     [SerializeField] int random;
+
     [SerializeField] int createCount = 5;
+
     [SerializeField] List<GameObject> obstacles;
+
     [SerializeField] string [ ] obstaclesNames;
+
     [SerializeField] Transform[] transforms;
+
+    [SerializeField] WaitForSeconds waitforseconds 
+                            = new WaitForSeconds(5);
    
     void Start()
     { 
@@ -79,7 +86,8 @@ public class ObstacleManager : MonoBehaviour
                         (obstaclesNames[Random.Range
                         (0, obstaclesNames.Length)]) , transform);
 
-                    clone.name = clone.name.Replace("(Clone)", "");
+                    clone.name = clone.name.Replace
+                        ("(Clone)", "");
 
                     clone.SetActive(false);
 
@@ -102,7 +110,7 @@ public class ObstacleManager : MonoBehaviour
 
             obstacles[random].SetActive(true);
 
-            yield return new WaitForSeconds(5);
+            yield return waitforseconds;
 
            
 
