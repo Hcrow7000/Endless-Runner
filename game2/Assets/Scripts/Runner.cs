@@ -62,7 +62,8 @@ public class Runner : MonoBehaviour
 
     void Move()
     {
-        rigidBody.position = new Vector3(positionX * (int)roadLine,0,0);
+        rigidBody.position = new Vector3
+            (positionX * (int)roadLine,0,0);
     }
 
 }
