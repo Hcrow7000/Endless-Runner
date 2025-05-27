@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum RoadLine
 {
@@ -62,8 +63,14 @@ public class Runner : MonoBehaviour
 
     void Move()
     {
-        rigidBody.position = new Vector3
-            (positionX * (int)roadLine,0,0);
+
+        rigidBody.position = Vector3.Lerp
+        (
+            rigidBody.position,
+            new Vector3(positionX * (int)roadLine, 0, 0),
+            SpeedManager.Instance.Speed * Time.deltaTime
+        ); 
+  
     }
 
 }

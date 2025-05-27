@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour, Collidable
 {
-    [SerializeField] float speed ;
+    
 
     public void Activate()
     {
@@ -15,7 +15,7 @@ public class Obstacle : MonoBehaviour, Collidable
     void Update()
     {
         transform.Translate(Vector3.up 
-            * speed
+            * SpeedManager.Instance.Speed
             * Time.deltaTime);   
     }
 }
