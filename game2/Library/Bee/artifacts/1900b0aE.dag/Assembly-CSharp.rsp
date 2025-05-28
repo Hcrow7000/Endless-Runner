@@ -363,6 +363,7 @@
 "Assets/Scripts/Road Manager.cs"
 "Assets/Scripts/Road.cs"
 "Assets/Scripts/Runner.cs"
+"Assets/Scripts/Singleton.cs"
 "Assets/Scripts/Speed Manager.cs"
 "Assets/Scripts/TimeManager.cs"
 -langversion:9.0

@@ -1,29 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedManager : MonoBehaviour
+public class SpeedManager : 
+    Singleton<SpeedManager>
 {
 
     [SerializeField] float speed = 30.0f;
     [SerializeField] float ltspeed = 55.0f;
 
-    static SpeedManager instance;
-
-    public static SpeedManager Instance
-    { get { return instance; } }
-
     public float Speed { get { return speed; } }
-
-    public float LtSpeed {get { return ltspeed; } }
-
-    private void Awake()
+    
+    private void Start()
     {
-        if ( instance == null)
-        {
-            instance = this;
-        }
+        StartCoroutine(Increase());
 
+    }
+
+    IEnumerator Increase()
+    {
+        while (speed < ltspeed)
+        {
+            yield return CoroutineCache.WaitForSecond(5.0f);
+
+            speed = speed + 2.5f;
+
+        }
     }
 
 }
