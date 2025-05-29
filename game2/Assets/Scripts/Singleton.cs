@@ -13,16 +13,18 @@ public class Singleton<T> : MonoBehaviour
         if (instance == null)
         {
             instance = (T)FindAnyObjectByType
-                (typeof(T));
-            DontDestroyOnLoad(instance.gameObject);
+                (typeof(T)); 
+            
         }
         else
         {
-            Destroy(instance.gameObject);
+            Destroy(gameObject);
+
+            return;
+
         }
-
-    }
-
-   
+       
+        DontDestroyOnLoad(instance.gameObject);
+    } 
 
 }
