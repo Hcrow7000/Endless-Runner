@@ -1327,6 +1327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f108f7fb2a9425d41a47302e37e3d6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startButton: {fileID: 1564070149}
 --- !u!4 &1309436376
 Transform:
   m_ObjectHideFlags: 0
@@ -1728,7 +1729,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1309436375}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Execute
+        m_MethodName: Excute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

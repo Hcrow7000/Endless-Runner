@@ -7,9 +7,16 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-   public void Execute()
+    [SerializeField] GameObject startButton;
+
+    public void DisableButton()
+    {
+        startButton.SetActive(false);
+    }
+
+   public void Excute()
    {
-        Debug.Log("Execute");
+        State.Publish(Condition.START); 
    }
 
     public void Finish()
@@ -21,4 +28,18 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Resume");
     }
+
+    private void OnEnable()
+    {
+        State.Subscribe
+            (Condition.START, DisableButton);
+        
+    }
+
+    public void OnDisable()
+    {
+        State.UnSubscribe
+            (Condition.START, DisableButton);
+    }
+
 }

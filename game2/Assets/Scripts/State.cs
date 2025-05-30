@@ -19,46 +19,58 @@ public static class State
     private static Action resume;
 
     public static void Subscribe
-        (Condition condition, UnityAction unityAction)
+        (Condition condition, Action unityAction)
     {
-        UnityEvent unityevent = new UnityEvent();
-
-        unityevent.AddListener (unityAction);
        
         switch(condition)
         {
             case Condition.START:
+                start += unityAction;
                 break;
             case Condition.FINISH:
+                finish += unityAction;
                 break;
             case Condition.RESUME:
+                resume += unityAction;
                 break;
         }
 
     }
 
     public static void UnSubscribe
-        (Condition condition, UnityAction unityAction)
+        (Condition condition,Action unityAction)
     {
-        UnityEvent unityevent = new UnityEvent();
-
-        unityevent.AddListener(unityAction);
-
-        switch(condition)
+        switch (condition)
         {
             case Condition.START:
+                start -= unityAction;
                 break;
             case Condition.FINISH:
+                finish -= unityAction;
                 break;
             case Condition.RESUME:
+                resume -= unityAction;
                 break;
         }
         
     }
 
-    public static void Publish(Condition condition)
+    public static void Publish
+        (Condition condition)
     {
-        
+
+        switch (condition)
+        {
+            case Condition.START:
+                start?.Invoke();
+                break;
+            case Condition.FINISH:
+                finish?.Invoke();
+                break;
+            case Condition.RESUME:
+                resume?.Invoke();
+                break;
+        }
     }
 
 }

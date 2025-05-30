@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,16 +8,35 @@ public class RoadManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> roads;
     [SerializeField] float offset = 40.0f;
-    void Update()
+   
+    private void OnEnable()
     {
-        for (int i = 0; i < roads.Count; i++)
+        State.Subscribe(Condition.START,Excute);
+    }
+
+    void Excute()
+    {
+        StartCoroutine(Coroutine());
+    }
+
+    IEnumerator Coroutine()
+    {
+        while (true)
         {
-            roads[i].transform.Translate
-                (Vector3.back * SpeedManager.Instance.Speed 
-                * Time.deltaTime);
- 
+            for (int i = 0; i < roads.Count; i++)
+            {
+                roads[i].transform.
+                    Translate(Vector3.back *
+                    SpeedManager.Instance.Speed
+                    * Time.deltaTime);
+
+            }
+
+            yield return null;
+
         }
     }
+
 
     public void InitializePosition()
     {
@@ -29,5 +49,10 @@ public class RoadManager : MonoBehaviour
         newRoad.transform.position = new Vector3(0, 0, newZ );
 
         roads.Add(newRoad);
+    }
+
+    private void OnDisable()
+    {
+        State.UnSubscribe(Condition.START, Excute);       
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public enum RoadLine
@@ -15,6 +16,7 @@ public class Runner : MonoBehaviour
     [SerializeField] RoadLine roadLine;
     [SerializeField] Rigidbody rigidBody;
     [SerializeField] float positionX = 3;
+    
 
     private void Awake()
     {

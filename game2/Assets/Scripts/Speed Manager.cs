@@ -12,11 +12,17 @@ public class SpeedManager :
 
     public float Speed { get { return speed; } }
     
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(Increase());
+        State.Subscribe(Condition.START, Excute);
 
     }
+
+    public void Excute()
+    {
+        StartCoroutine(Increase());
+    }
+
 
     IEnumerator Increase()
     {
@@ -27,6 +33,11 @@ public class SpeedManager :
             speed = speed + 2.5f;
 
         }
+    }
+
+    private void OnDisable()
+    {
+        State.UnSubscribe(Condition.START,Excute);
     }
 
 }
