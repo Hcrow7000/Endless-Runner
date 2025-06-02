@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
-        Debug.Log("Resume");
+        State.Publish(Condition.RESUME);
     }
 
     private void OnEnable()

@@ -22,6 +22,7 @@ public class ObstacleManager : MonoBehaviour
     private void OnEnable()
     {
         State.Subscribe(Condition.START, Excute);
+       
     }
 
     public void Excute()
@@ -122,6 +123,7 @@ public class ObstacleManager : MonoBehaviour
     private void OnDisable()
     {
         State.UnSubscribe(Condition.START, Excute);
+       
     }
 
 }

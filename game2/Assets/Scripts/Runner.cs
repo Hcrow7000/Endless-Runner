@@ -15,23 +15,28 @@ public class Runner : MonoBehaviour
 {
     [SerializeField] RoadLine roadLine;
     [SerializeField] Rigidbody rigidBody;
+    [SerializeField] Animator animator;
     [SerializeField] float positionX = 3;
     
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody>();
 
     }
 
-    void Start()
+    private void OnEnable()
     {
-        
-    }
+        State.Subscribe(Condition.START,StateTransition);
+        State.Subscribe(Condition.START, Excute);
 
-    void Update()
+        State.Subscribe(Condition.FINISH, Die);
+    }
+   
+    void Excute()
     {
-        Keyboard();
+        StartCoroutine(Coroutine());
     }
 
     private void FixedUpdate()
@@ -39,40 +44,69 @@ public class Runner : MonoBehaviour
         Move();
     }
 
-    void Keyboard()
+    IEnumerator Coroutine()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        while (true)
         {
-            if (roadLine != RoadLine.LEFT)
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                roadLine--;
+                if (roadLine != RoadLine.LEFT)
+                {
+                    roadLine--;
 
-
+                    animator.Play("Left Avoid");
+                }
             }
 
-            
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (roadLine != RoadLine.RIGHT)
+            if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                roadLine++;
+                if (roadLine != RoadLine.RIGHT)
+                {
+                    roadLine++;
+
+                    animator.Play("Right Avoid");
+                }
             }
+            yield return null;
         }
     }
 
     void Move()
     {
-
         rigidBody.position = Vector3.Lerp
         (
             rigidBody.position,
             new Vector3(positionX * (int)roadLine, 0, 0),
             SpeedManager.Instance.Speed * Time.deltaTime
         ); 
-  
+    }
+
+    void Die()
+    {
+        animator.Play("Die");
+    }
+
+    public void StateTransition()
+    {
+        animator.SetTrigger("Start");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Obstacle obstacle = other.GetComponent<Obstacle>();
+
+        if(obstacle !=null)
+        {
+            State.Publish(Condition.FINISH);
+        }
+    }
+
+    private void OnDisable()
+    {
+        State.UnSubscribe(Condition.START,StateTransition);
+        State.UnSubscribe(Condition.START, Excute);
+
+        State.UnSubscribe(Condition.FINISH, Die);
     }
 
 }
