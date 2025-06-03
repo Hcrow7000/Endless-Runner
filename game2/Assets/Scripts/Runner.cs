@@ -32,11 +32,17 @@ public class Runner : MonoBehaviour
         State.Subscribe(Condition.START, Excute);
 
         State.Subscribe(Condition.FINISH, Die);
+        State.Subscribe(Condition.FINISH,Release);
     }
-   
+
     void Excute()
     {
         StartCoroutine(Coroutine());
+    }
+
+    void Release()
+    {
+        StopAllCoroutines();
     }
 
     private void FixedUpdate()
@@ -91,6 +97,12 @@ public class Runner : MonoBehaviour
         animator.SetTrigger("Start");
     }
 
+    public void Synchronize()
+    {
+        animator.speed = SpeedManager.Instance.Speed
+            / SpeedManager.Instance.InitializeSpeed;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Obstacle obstacle = other.GetComponent<Obstacle>();
@@ -107,6 +119,7 @@ public class Runner : MonoBehaviour
         State.UnSubscribe(Condition.START, Excute);
 
         State.UnSubscribe(Condition.FINISH, Die);
+        State.UnSubscribe(Condition.FINISH, Release);
     }
 
 }

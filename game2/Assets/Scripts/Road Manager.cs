@@ -12,11 +12,17 @@ public class RoadManager : MonoBehaviour
     private void OnEnable()
     {
         State.Subscribe(Condition.START,Excute);
+        State.Subscribe(Condition.FINISH, Release); 
     }
 
     void Excute()
     {
         StartCoroutine(Coroutine());
+    }
+
+    void Release()
+    {
+        StopAllCoroutines();
     }
 
     IEnumerator Coroutine()
@@ -53,6 +59,7 @@ public class RoadManager : MonoBehaviour
 
     private void OnDisable()
     {
-        State.UnSubscribe(Condition.START, Excute);       
+        State.UnSubscribe(Condition.START, Excute);
+        State.UnSubscribe(Condition.FINISH, Release);
     }
 }

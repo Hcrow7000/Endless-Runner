@@ -22,7 +22,8 @@ public class ObstacleManager : MonoBehaviour
     private void OnEnable()
     {
         State.Subscribe(Condition.START, Excute);
-       
+
+        State.Subscribe(Condition.FINISH, Release);
     }
 
     public void Excute()
@@ -32,8 +33,12 @@ public class ObstacleManager : MonoBehaviour
         Create();
 
         StartCoroutine(ActiveObstacle());
-
     }    
+
+    void Release()
+    {
+        StopAllCoroutines();
+    }
    
     public void Create()
     {
@@ -114,8 +119,6 @@ public class ObstacleManager : MonoBehaviour
 
             yield return CoroutineCache.WaitForSecond(5.0f);
 
-           
-
         }
 
     }
@@ -123,7 +126,8 @@ public class ObstacleManager : MonoBehaviour
     private void OnDisable()
     {
         State.UnSubscribe(Condition.START, Excute);
-       
+
+        State.UnSubscribe(Condition.FINISH,Release);
     }
 
 }

@@ -660,7 +660,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
-  ltspeed: 55
+  ltspeed: 60
+  initializeSpeed: 0
 --- !u!4 &470638052
 Transform:
   m_ObjectHideFlags: 0
@@ -4599,6 +4600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadLine: 0
   rigidBody: {fileID: 0}
+  animator: {fileID: 0}
   positionX: 3
 --- !u!4 &7704676656027018300
 Transform:

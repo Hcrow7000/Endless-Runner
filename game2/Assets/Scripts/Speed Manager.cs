@@ -10,12 +10,18 @@ public class SpeedManager :
     [SerializeField] float speed = 30.0f;
     [SerializeField] float ltspeed = 55.0f;
 
+    [SerializeField] float initializeSpeed;
+
     public float Speed { get { return speed; } }
     
+    public float InitializeSpeed {get { return initializeSpeed; } }
+
     private void OnEnable()
     {
-        State.Subscribe(Condition.START, Excute);
+        initializeSpeed= speed;
 
+        State.Subscribe(Condition.START, Excute);
+        State.Subscribe(Condition.FINISH, Release);
     }
 
     public void Excute()
@@ -23,14 +29,18 @@ public class SpeedManager :
         StartCoroutine(Increase());
     }
 
+    void Release()
+    {
+        StopAllCoroutines();
+    }
 
     IEnumerator Increase()
     {
         while (speed < ltspeed)
         {
-            yield return CoroutineCache.WaitForSecond(5.0f);
+            yield return CoroutineCache.WaitForSecond(0.533f);
 
-            speed = speed + 2.5f;
+            speed = speed + 0.5f;
 
         }
     }
@@ -38,6 +48,7 @@ public class SpeedManager :
     private void OnDisable()
     {
         State.UnSubscribe(Condition.START,Excute);
+        State.UnSubscribe(Condition.FINISH,Release);
     }
 
 }
