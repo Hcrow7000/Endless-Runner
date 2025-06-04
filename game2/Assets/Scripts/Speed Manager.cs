@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpeedManager : 
     Singleton<SpeedManager>
@@ -45,8 +46,12 @@ public class SpeedManager :
         }
     }
 
+  
+
     private void OnDisable()
     {
+       
+
         State.UnSubscribe(Condition.START,Excute);
         State.UnSubscribe(Condition.FINISH,Release);
     }
