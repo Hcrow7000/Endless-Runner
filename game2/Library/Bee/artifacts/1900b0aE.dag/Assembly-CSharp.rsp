@@ -366,6 +366,8 @@
 "Assets/Scripts/Road Manager.cs"
 "Assets/Scripts/Road.cs"
 "Assets/Scripts/Runner.cs"
+"Assets/Scripts/Scenery Manager.cs"
+"Assets/Scripts/Screen Manager.cs"
 "Assets/Scripts/Singleton.cs"
 "Assets/Scripts/Speed Manager.cs"
 "Assets/Scripts/State.cs"
